@@ -1,0 +1,7 @@
+; Godot project file for EasySpire mod PCK generation
+[gd_resource type="Resource"]
+
+config_version=5
+
+[application]
+config/name="EasySpire"

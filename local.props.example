@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Windows example -->
+    <STS2GamePath>C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2</STS2GamePath>
+    <GameDataDir>$(STS2GamePath)\data_sts2_windows_x86_64</GameDataDir>
+
+    <!-- Mac example (uncomment if developing on Mac) -->
+    <!-- <STS2GamePath>/Users/YOU/Library/Application Support/Steam/steamapps/common/Slay the Spire 2</STS2GamePath> -->
+    <!-- <GameDataDir>$(STS2GamePath)/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_arm64</GameDataDir> -->
+  </PropertyGroup>
+</Project>
