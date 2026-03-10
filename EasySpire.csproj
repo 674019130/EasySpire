@@ -10,7 +10,7 @@
     <ModName>EasySpire</ModName>
     <ModDisplayName>Easy Spire</ModDisplayName>
     <ModAuthor>susu</ModAuthor>
-    <ModVersion>1.0.0</ModVersion>
+    <ModVersion>1.2.0</ModVersion>
 
     <AssemblyName>$(ModName)</AssemblyName>
     <Version>$(ModVersion)</Version>
