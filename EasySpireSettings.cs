@@ -37,5 +37,14 @@ public sealed record EasySpireSettings
     [JsonPropertyName("shopDiscount")]
     public FeatureToggle ShopDiscount { get; init; } = new() { Enabled = true, Value = 0.5 };
 
+    [JsonPropertyName("deathRevive")]
+    public FeatureToggle DeathRevive { get; init; } = new() { Enabled = true, Value = 0.5 };
+
+    [JsonPropertyName("moreCardChoices")]
+    public FeatureToggle MoreCardChoices { get; init; } = new() { Enabled = true, Value = 2.0 };
+
+    [JsonPropertyName("restSiteBoost")]
+    public FeatureToggle RestSiteBoost { get; init; } = new() { Enabled = true, Value = 1.5 };
+
     public static EasySpireSettings Defaults { get; } = new();
 }

@@ -22,6 +22,9 @@ internal static class ModInfoUiPatch
         ("ExtraEnergy", "额外能量", true, "点数"),
         ("GoldBoost", "金币加成", true, "倍率"),
         ("ShopDiscount", "商店折扣", true, "倍率"),
+        ("DeathRevive", "死亡复活", true, "回血比例"),
+        ("MoreCardChoices", "更多卡牌选择", true, "额外张数"),
+        ("RestSiteBoost", "篝火回血加成", true, "倍率"),
     ];
 
     [HarmonyTargetMethods]
