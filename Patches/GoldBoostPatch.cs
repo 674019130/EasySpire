@@ -29,7 +29,9 @@ internal static class GoldBoostPatch
 
         if (__0 > 0) // Only boost positive gold gains, not costs
         {
+            var original = __0;
             __0 = (int)(__0 * settings.GoldBoost.Value);
+            Logger.LogPatchResult("GoldBoost", true, $"{original} -> {__0} (x{settings.GoldBoost.Value})");
         }
     }
 }

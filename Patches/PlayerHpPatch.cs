@@ -57,10 +57,11 @@ internal static class PlayerHpPatch
 
             maxHpProp.SetValue(__result, newMaxHp);
             currentHpProp.SetValue(__result, newMaxHp);
+            Logger.LogPatchResult("PlayerHpBoost", true, $"{maxHp} -> {newMaxHp} (x{multiplier})");
         }
-        catch
+        catch (Exception ex)
         {
-            // Silently fail - don't crash
+            Logger.LogError("PlayerHpBoost", ex);
         }
     }
 }

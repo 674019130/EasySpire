@@ -44,6 +44,8 @@ internal static class ShopDiscountPatch
         var settings = SettingsManager.Current;
         if (!settings.ShopDiscount.Enabled) return;
 
+        var original = __result;
         __result = Math.Max(1, (int)(__result * settings.ShopDiscount.Value));
+        Logger.LogPatchResult("ShopDiscount", true, $"Price {original} -> {__result}");
     }
 }

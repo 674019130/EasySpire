@@ -37,7 +37,9 @@ internal static class EnemyDamagePatch
             {
                 // Check if the source is an enemy (not the player hurting themselves)
                 // We scale all incoming damage - this is the simplest approach
-                __args[i] = (int)(amount * settings.EnemyDamageReduce.Value);
+                var newAmount = (int)(amount * settings.EnemyDamageReduce.Value);
+                Logger.LogPatchResult("EnemyDamageReduce", true, $"{amount} -> {newAmount}");
+                __args[i] = newAmount;
                 break;
             }
         }

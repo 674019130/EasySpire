@@ -66,10 +66,11 @@ internal static class PostCombatHealPatch
             var healAmount = (int)(maxHp * settings.PostCombatHeal.Value);
             var newHp = Math.Min(maxHp, currentHp + healAmount);
             currentHpProp.SetValue(player, newHp);
+            Logger.LogPatchResult("PostCombatHeal", true, $"{currentHp} -> {newHp} (+{healAmount})");
         }
-        catch
+        catch (Exception ex)
         {
-            // Don't crash if we can't find the player
+            Logger.LogError("PostCombatHeal", ex);
         }
     }
 }

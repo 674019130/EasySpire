@@ -35,7 +35,9 @@ internal static class EnemyHpPatch
 
         if (creatureType != null && playerType != null && !playerType.IsAssignableFrom(creatureType))
         {
+            var original = __0;
             __0 = Math.Max(1, (int)(__0 * settings.EnemyHpReduce.Value));
+            Logger.LogPatchResult("EnemyHpReduce", true, $"{creatureType.Name} MaxHp {original} -> {__0}");
         }
     }
 }

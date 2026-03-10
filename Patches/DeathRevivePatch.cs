@@ -77,6 +77,7 @@ internal static class DeathRevivePatch
                         var reviveHp = Math.Max(1, (int)(maxHp * settings.DeathRevive.Value));
                         currentHpProp.SetValue(creature, reviveHp);
                         _reviveUsed = true;
+                        Logger.LogPatchResult("DeathRevive", true, $"Revived with {reviveHp}/{maxHp} HP");
                         return false; // Cancel the death
                     }
                 }

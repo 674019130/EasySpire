@@ -59,9 +59,14 @@ internal static class CurseNullifyPatch
 
         // If it's an Afflict call, skip it entirely (don't add curses)
         if (__originalMethod.Name == "Afflict")
+        {
+            Logger.LogPatchResult("NullifyCurses", true, "Blocked Afflict call");
             return false; // skip original
+        }
 
         // For OnPlay/OnTurnEnd of curse cards, skip the negative effect
+        Logger.LogPatchResult("NullifyCurses", true,
+            $"Blocked {__originalMethod.DeclaringType?.Name}.{__originalMethod.Name}");
         return false; // skip original
     }
 }

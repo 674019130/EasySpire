@@ -91,12 +91,14 @@ internal static class CardRewardOptionsPatch
                 // We've found the card list - the extra cards need to be generated
                 // through the game's own card generation system, which is complex.
                 // For now, this serves as a hook point that can be expanded.
+                Logger.LogPatchResult("MoreCardChoices", true,
+                    $"Found card list with {currentCount} choices (extra: {extraCards})");
                 break;
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // Silently fail
+            Logger.LogError("MoreCardChoices", ex);
         }
     }
 }

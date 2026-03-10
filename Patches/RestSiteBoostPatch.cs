@@ -74,10 +74,11 @@ internal static class RestSiteBoostPatch
             var bonusHeal = (int)(maxHp * bonusRatio);
             var newHp = Math.Min(maxHp, currentHp + bonusHeal);
             currentHpProp.SetValue(player, newHp);
+            Logger.LogPatchResult("RestSiteBoost", true, $"{currentHp} -> {newHp} (+{bonusHeal} bonus)");
         }
-        catch
+        catch (Exception ex)
         {
-            // Don't crash
+            Logger.LogError("RestSiteBoost", ex);
         }
     }
 }

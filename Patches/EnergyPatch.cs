@@ -28,6 +28,8 @@ internal static class EnergyPatch
         var settings = SettingsManager.Current;
         if (!settings.ExtraEnergy.Enabled) return;
 
+        var original = __0;
         __0 += (int)settings.ExtraEnergy.Value;
+        Logger.LogPatchResult("ExtraEnergy", true, $"{original} -> {__0} (+{(int)settings.ExtraEnergy.Value})");
     }
 }
