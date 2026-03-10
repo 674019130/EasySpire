@@ -30,11 +30,24 @@ internal static class PlayerHpPatch
         {
             var type = __result.GetType();
 
-            // Try property names on Creature/Player hierarchy
-            var maxHpProp = type.GetProperty("MaxHp") ??
-                            type.GetProperty("Hp");
-            var currentHpProp = type.GetProperty("CurrentHp") ??
-                                type.GetProperty("Hp");
+            // HP properties are on Creature base class, need to search up the hierarchy
+            var maxHpProp = type.GetProperty("MaxHp",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.FlattenHierarchy);
+            var currentHpProp = type.GetProperty("CurrentHp",
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.FlattenHierarchy);
+
+            // If not found on Player, walk up to Creature base class explicitly
+            if (maxHpProp == null || currentHpProp == null)
+            {
+                var creatureType = AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature");
+                if (creatureType != null)
+                {
+                    maxHpProp ??= creatureType.GetProperty("MaxHp");
+                    currentHpProp ??= creatureType.GetProperty("CurrentHp");
+                }
+            }
 
             if (maxHpProp == null || currentHpProp == null) return;
 

@@ -18,7 +18,7 @@ internal static class PostCombatHealPatch
         // Try to find a victory/end combat method
         foreach (var method in combatManagerType.GetMethods())
         {
-            if (method.Name is "EndCombatVictory" or "OnCombatVictory" or "Victory")
+            if (method.Name is "CheckWinCondition" or "EndCombatInternal")
                 yield return method;
         }
     }
@@ -53,9 +53,12 @@ internal static class PostCombatHealPatch
             var player = playerProp?.GetValue(runState);
             if (player == null) return;
 
-            // Heal the player
-            var maxHpProp = player.GetType().GetProperty("MaxHp");
-            var currentHpProp = player.GetType().GetProperty("CurrentHp");
+            // Heal the player - HP props may be on Creature base class
+            var pType = player.GetType();
+            var maxHpProp = pType.GetProperty("MaxHp") ??
+                AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature")?.GetProperty("MaxHp");
+            var currentHpProp = pType.GetProperty("CurrentHp") ??
+                AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature")?.GetProperty("CurrentHp");
             if (maxHpProp == null || currentHpProp == null) return;
 
             var maxHp = (int)maxHpProp.GetValue(player)!;

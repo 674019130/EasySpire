@@ -66,8 +66,10 @@ internal static class DeathRevivePatch
                 if (playerType != null && playerType.IsAssignableFrom(creatureType))
                 {
                     // This is a player dying - revive them!
-                    var maxHpProp = creatureType.GetProperty("MaxHp");
-                    var currentHpProp = creatureType.GetProperty("CurrentHp");
+                    // HP props may be on Creature base class
+                    var baseType = AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature");
+                    var maxHpProp = creatureType.GetProperty("MaxHp") ?? baseType?.GetProperty("MaxHp");
+                    var currentHpProp = creatureType.GetProperty("CurrentHp") ?? baseType?.GetProperty("CurrentHp");
 
                     if (maxHpProp != null && currentHpProp != null)
                     {

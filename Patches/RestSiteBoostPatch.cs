@@ -58,8 +58,11 @@ internal static class RestSiteBoostPatch
             var player = playerProp?.GetValue(runState);
             if (player == null) return;
 
-            var maxHpProp = player.GetType().GetProperty("MaxHp");
-            var currentHpProp = player.GetType().GetProperty("CurrentHp");
+            var pType = player.GetType();
+            var maxHpProp = pType.GetProperty("MaxHp") ??
+                AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature")?.GetProperty("MaxHp");
+            var currentHpProp = pType.GetProperty("CurrentHp") ??
+                AccessTools.TypeByName("MegaCrit.Sts2.Core.Entities.Creatures.Creature")?.GetProperty("CurrentHp");
             if (maxHpProp == null || currentHpProp == null) return;
 
             var maxHp = (int)maxHpProp.GetValue(player)!;

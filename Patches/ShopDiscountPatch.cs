@@ -29,7 +29,7 @@ internal static class ShopDiscountPatch
             // Look for price-related properties or methods
             foreach (var method in type.GetMethods())
             {
-                if (method.Name is "GetPrice" or "get_Price" or "get_Cost"
+                if (method.Name is "get_Cost" or "GetCost" or "CalcCost"
                     && method.DeclaringType == type)
                 {
                     yield return method;
