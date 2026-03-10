@@ -8,9 +8,10 @@
     <Nullable>enable</Nullable>
 
     <ModName>EasySpire</ModName>
-    <ModDisplayName>Easy Spire</ModDisplayName>
+    <ModDisplayName>Easy Spire - 轻松爬塔</ModDisplayName>
     <ModAuthor>susu</ModAuthor>
     <ModVersion>1.2.0</ModVersion>
+    <ModDescription>Configurable difficulty reduction mod. Toggle features in Settings &gt; Mods. 可配置的降难度 mod，在设置 &gt; Mods 中开关各项功能。</ModDescription>
 
     <AssemblyName>$(ModName)</AssemblyName>
     <Version>$(ModVersion)</Version>
@@ -38,4 +39,19 @@
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+
+  <!-- Auto-generate mod_manifest.json after build -->
+  <Target Name="GenerateModManifest" AfterTargets="Build">
+    <PropertyGroup>
+      <ModManifestContent>{
+  "pck_name": "$(ModName)",
+  "name": "$(ModDisplayName)",
+  "author": "$(ModAuthor)",
+  "description": "$(ModDescription)",
+  "version": "$(ModVersion)"
+}</ModManifestContent>
+    </PropertyGroup>
+    <WriteLinesToFile File="$(OutputPath)mod_manifest.json" Lines="$(ModManifestContent)" Overwrite="true" />
+    <Message Text="Generated mod_manifest.json in $(OutputPath)" Importance="high" />
+  </Target>
 </Project>
